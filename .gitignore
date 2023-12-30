@@ -71,8 +71,5 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
-# Generated Datasets
-/[Dd]atasets
-
 # MacOS meta file
 .DS_Store
