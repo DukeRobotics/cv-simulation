@@ -72,7 +72,7 @@ pysolotools-fiftyone "Datasets/<SOLO Dataset>"
 ```
 
 > [!NOTE]
-> When running with a web browser, it will open with a subset of frames visible. The data is still being imported in the background. Once all frames are imported, click the "FiftyOne" button in the top left to update the viewer.
+> The viewer will initially open with a subset of frames visible. The data is still being imported in the background. Once all frames are imported, click the "FiftyOne" button in the top left to update the viewer.
 
 ## Converting from SOLO
 To convert from SOLO to COCO format, run:
