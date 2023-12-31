@@ -29,26 +29,20 @@ for subfolder in os.listdir(os.path.join(cwd, folder)):
                 kept_image_files += 1
 
 # Print the number of removed files
-print("Removed {} files".format(removed_files))
+print("Removed {} files.".format(removed_files))
 
 # Print the number of saved image files
-print("Kept {} image files".format(kept_image_files))
+print("Kept {} image files.".format(kept_image_files))
 
-# Get the folder in current directory as input from user
-modify_metadata = input("Would you like to modify the folder's metadata to reflect the new number of image files? (y/n): ")
+# Modify the JSON metadata to reflect the new number of files
+with open(os.path.join(cwd, folder, "metadata.json"), "r+") as jsonFile:
+    data = json.load(jsonFile)
 
-if modify_metadata == 'y' or modify_metadata == 'Y':
-    # Modify the JSON metadata to reflect the new number of files
-    with open(os.path.join(cwd, folder, "metadata.json"), "r+") as jsonFile:
-        data = json.load(jsonFile)
+    data["totalFrames"] = kept_image_files
+    data["totalSequences"] = kept_image_files
 
-        data["totalFrames"] = kept_image_files
-        data["totalSequences"] = kept_image_files
+    jsonFile.seek(0)
+    json.dump(data, jsonFile, indent=2)
+    jsonFile.truncate()
 
-        jsonFile.seek(0)
-        json.dump(data, jsonFile, indent=2)
-        jsonFile.truncate()
-
-        print("Modified metadata.json to reflect the new number of image files.")
-else:
-    print("Did not modify metadata.json.")
+    print("Modified metadata.json to reflect the new number of image files.")

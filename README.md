@@ -60,6 +60,9 @@ Before using the generated dataset, run:
 ```
 python Datasets/remove_frames.py
 ```
+
+Whem prompted, enter the path to the generated SOLO dataset (e.g., `Datasets/solo`).
+
 The script removes all non-zero steps from each sequence and modifies the metadata accordingly. This helps to remove frames that are too similar from our dataset.
 
 ## Visualizing SOLO Datasets
