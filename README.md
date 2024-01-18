@@ -56,15 +56,6 @@ Each time the simulation is run with the above option checked, a new folder is c
 
 The new folder contains the generated images and bounding boxes in [SOLO](https://docs.unity3d.com/Packages/com.unity.perception@1.0/manual/Schema/SoloSchema.html) format, created by Unity.
 
-Before using the generated dataset, run:
-```
-python Datasets/remove_frames.py
-```
-
-Whem prompted, enter the path to the generated SOLO dataset (e.g., `Datasets/solo`).
-
-The script removes all non-zero steps from each sequence and modifies the metadata accordingly. This helps to remove frames that are too similar from our dataset.
-
 ## Visualizing SOLO Datasets
 To visualize a SOLO dataset, use [Voxel51](https://voxel51.com):
 ```python
