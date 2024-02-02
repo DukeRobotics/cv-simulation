@@ -59,7 +59,7 @@ public class FlyCamera : MonoBehaviour {
     List<Vector3> startingPositions = new List<Vector3>();
     public int startingPositionIndex = 0;
 
-    float nextUpdateTime = 0.0f;
+    float nextUpdateTime = 0.1f;
 
     int interval;
 
@@ -71,6 +71,7 @@ public class FlyCamera : MonoBehaviour {
     // public float updateInterval = 0.1f;
 
     void Start () {
+        // secondsPerRotation = (360.0f - (4 * exclusionAngle)) / degreesPerSecond;
         float x = UnityEngine.Random.Range(minBounds.x, maxBounds.x);
         float y = UnityEngine.Random.Range(minBounds.y, maxBounds.y);
         float z = UnityEngine.Random.Range(minBounds.z, maxBounds.z);
@@ -81,7 +82,7 @@ public class FlyCamera : MonoBehaviour {
     public Vector3 minBounds = new Vector3(-7.5f, -1.5f, -7.5f); // Replace with your calculated min values
     public Vector3 maxBounds = new Vector3(7.5f, 0.0f, 7.5f);   // Replace with your calculated max values
 
-    public float updateInterval = 2f; // Time interval for position update
+    public float updateInterval = 0.5f; // Time interval for position update
 
     /* ((x, y, z), (row, pitch, yaw))
      *  We need all 6dof because we vary all of them
@@ -95,7 +96,11 @@ public class FlyCamera : MonoBehaviour {
     public float distanceFromTarget;
 
 
+    // secondsPerRotation = 0.1f;
+
     void Update () {
+        secondsPerRotation = 0.1F;
+
         if (Time.fixedTime >= nextUpdateTime) {
             // Generate a random position within bounds
             float x = UnityEngine.Random.Range(minBounds.x, maxBounds.x);
@@ -108,10 +113,11 @@ public class FlyCamera : MonoBehaviour {
             transform.LookAt(target.transform);
 
             // Schedule the next update
-            nextUpdateTime = Time.fixedTime + updateInterval;
+            nextUpdateTime += secondsPerRotation;
+            //Console.writeline("UPDATED at " + Time.fixedTim);
         }
 
-        else if(manualPilot){
+        if(manualPilot){
             manualPilotMove();
         }
     }
