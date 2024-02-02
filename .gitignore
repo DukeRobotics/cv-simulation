@@ -73,3 +73,6 @@ crashlytics-build.properties
 
 # MacOS meta file
 .DS_Store
+
+# Visual Studio Code settings
+.vscode
