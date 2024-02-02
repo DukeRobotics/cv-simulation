@@ -53,8 +53,8 @@ public class FlyCamera : MonoBehaviour {
     // public float minExcludeZ = -1.0f;
     // public float maxExcludeZ = 1.0f;
 
-    float minExcludeZ = 0.0f;
-    float maxExcludeZ = 0.0f;
+    // float minExcludeZ = 0.0f;
+    // float maxExcludeZ = 0.0f;
 
     List<Vector3> startingPositions = new List<Vector3>();
     public int startingPositionIndex = 0;
@@ -63,64 +63,84 @@ public class FlyCamera : MonoBehaviour {
 
     int interval;
 
+    public float minAngle = -90f;
+    public float maxAngle = 90f;
+    public float minDistance = 0f;
+    public float maxDistance = 2f;
+
+    // public float updateInterval = 0.1f;
+
     void Start () {
-        secondsPerRotation = (360.0f - (4 * exclusionAngle)) / degreesPerSecond;
-
-        targetPoint = new GameObject().transform;
-        targetPoint.position = target.transform.position;
-
-        for(float x = minX; x <= maxX + xIncrement/10; x += xIncrement){
-            for(float z = minZ; z <= maxZ + zIncrement/10; z += zIncrement){
-                for(float y = minY; y <= maxY + yIncrement/10; y += yIncrement){
-                    startingPositions.Add(new Vector3(x, y, z));
-                }
-            }
-        }
-
-        interval = startingPositions.Count / (int) (maxX - minX + 1);
+        float x = UnityEngine.Random.Range(minBounds.x, maxBounds.x);
+        float y = UnityEngine.Random.Range(minBounds.y, maxBounds.y);
+        float z = UnityEngine.Random.Range(minBounds.z, maxBounds.z);
+        Vector3 startingPos = new Vector3(x, y, z);
     }
 
+
+    public Vector3 minBounds = new Vector3(-7.5f, -1.5f, -7.5f); // Replace with your calculated min values
+    public Vector3 maxBounds = new Vector3(7.5f, 0.0f, 7.5f);   // Replace with your calculated max values
+
+    public float updateInterval = 2f; // Time interval for position update
+
+    /* ((x, y, z), (row, pitch, yaw))
+     *  We need all 6dof because we vary all of them
+     * TODO: figure out how to set camera angles manually
+    */
+    public List<(Vector3, Vector3)> cameraPos = new List<(Vector3, Vector3)>();
+
+    // how much we can vary row/pitch/yaw (while still keeping target in frame)
+    // should be a function of the distance from the target (squared?)
+    // we probably need to do some math for this but ugh
+    public float distanceFromTarget;
+
+
     void Update () {
-        if(autoPilot){
-            if(Time.fixedTime >= nextUpdateTime){
-                if(startingPositionIndex >= startingPositions.Count){
-                    print("restart positions");
-                    startingPositionIndex = 0;
-                }
+        if (Time.fixedTime >= nextUpdateTime) {
+            // Generate a random position within bounds
+            float x = UnityEngine.Random.Range(minBounds.x, maxBounds.x);
+            float y = UnityEngine.Random.Range(minBounds.y, maxBounds.y);
+            float z = UnityEngine.Random.Range(minBounds.z, maxBounds.z);
+            Vector3 randomPosition = new Vector3(x, y, z);
 
-                print("startingPositionIndex: " + startingPositionIndex);
+            // Set the camera's position and orient it towards the target
+            transform.position = randomPosition;
+            transform.LookAt(target.transform);
 
-                Vector3 newPosition = startingPositions[startingPositionIndex];
-
-                transform.position = newPosition;
-
-                if(startingPositionIndex % interval == 0) {
-                    targetPoint.position = new Vector3(newPosition.x, targetPoint.position.y, targetPoint.position.z);
-                }
-
-                maxExcludeZ = Math.Abs(newPosition.z) * (float) Math.Sin(exclusionAngle * (float) Math.PI / 180.0f);
-                minExcludeZ = -maxExcludeZ;
-
-                nextUpdateTime += secondsPerRotation;
-                startingPositionIndex++;
-            }
-
-            if(transform.position.z > minExcludeZ && transform.position.z < maxExcludeZ) {
-                if(Math.Abs(transform.position.z - minExcludeZ) < Math.Abs(transform.position.z - maxExcludeZ)) {
-                    transform.position = new Vector3(transform.position.x, transform.position.y, maxExcludeZ);
-                }
-                else {
-                    transform.position = new Vector3(transform.position.x, transform.position.y, minExcludeZ);
-                }
-            }
-
-            transform.RotateAround(targetPoint.position, Vector3.up, degreesPerSecond * Time.deltaTime);
-            transform.LookAt(targetPoint);
+            // Schedule the next update
+            nextUpdateTime = Time.fixedTime + updateInterval;
         }
+
         else if(manualPilot){
             manualPilotMove();
         }
     }
+    // (Vector3 position, Quaternion rotation) GetRandomOrientation() {
+    //     float angleH = UnityEngine.Random.Range(minAngle, maxAngle);
+    //     float angleV = UnityEngine.Random.Range(minAngle, maxAngle);
+    //     float distance = UnityEngine.Random.Range(minDistance, maxDistance);
+
+    //     Vector3 position = CalculatePosition(angleH, angleV, distance);
+    //     Quaternion rotation = Quaternion.LookRotation(targetPoint.position - position);
+    //     return (position, rotation);
+    // }
+
+    // Vector3 CalculatePosition(float angleH, float angleV, float distance) {
+    //         // Convert angles from degrees to radians
+    //         float theta = angleV * Mathf.Deg2Rad; // Vertical angle
+    //         float phi = angleH * Mathf.Deg2Rad; // Horizontal angle
+
+    //         // Calculate Cartesian coordinates
+    //         float x = distance * Mathf.Sin(theta) * Mathf.Cos(phi);
+    //         float y = distance * Mathf.Cos(theta);
+    //         float z = distance * Mathf.Sin(theta) * Mathf.Sin(phi);
+
+    //         // Create position vector relative to the target's position
+    //         Vector3 position = new Vector3(x, y, z) + targetPoint.position;
+
+    //         return position;
+    //     }
+    
 
     private void manualPilotMove() {
         if (Input.GetMouseButton(0)){
