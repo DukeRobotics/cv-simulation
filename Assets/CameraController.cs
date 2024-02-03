@@ -99,55 +99,37 @@ public class FlyCamera : MonoBehaviour {
     // secondsPerRotation = 0.1f;
 
     void Update () {
-        secondsPerRotation = 0.1F;
+    secondsPerRotation = 0.1F;
 
-        if (Time.fixedTime >= nextUpdateTime) {
-            // Generate a random position within bounds
-            float x = UnityEngine.Random.Range(minBounds.x, maxBounds.x);
-            float y = UnityEngine.Random.Range(minBounds.y, maxBounds.y);
-            float z = UnityEngine.Random.Range(minBounds.z, maxBounds.z);
-            Vector3 randomPosition = new Vector3(x, y, z);
+    if (Time.fixedTime >= nextUpdateTime) {
+        // Generate a random position within bounds
+        float x = UnityEngine.Random.Range(minBounds.x, maxBounds.x);
+        float y = UnityEngine.Random.Range(minBounds.y, maxBounds.y);
+        float z = UnityEngine.Random.Range(minBounds.z, maxBounds.z);
+        Vector3 randomPosition = new Vector3(x, y, z);
 
-            // Set the camera's position and orient it towards the target
-            transform.position = randomPosition;
-            transform.LookAt(target.transform);
+        // Set the camera's position
+        transform.position = randomPosition;
+        
+        // Initially orient camera towards the target
+        transform.LookAt(target.transform);
 
-            // Schedule the next update
-            nextUpdateTime += secondsPerRotation;
-            //Console.writeline("UPDATED at " + Time.fixedTim);
-        }
+        // Apply random deviation
+        float horizontalDeviation = UnityEngine.Random.Range(-30f, 30f); // Adjust deviation range as needed
+        float verticalDeviation = UnityEngine.Random.Range(-30f, 30f); // Adjust deviation range as needed
+        transform.Rotate(Vector3.up, horizontalDeviation, Space.World);
+        transform.Rotate(Vector3.right, verticalDeviation, Space.Self);
 
-        if(manualPilot){
-            manualPilotMove();
-        }
+        // Schedule the next update
+        nextUpdateTime += secondsPerRotation;
     }
-    // (Vector3 position, Quaternion rotation) GetRandomOrientation() {
-    //     float angleH = UnityEngine.Random.Range(minAngle, maxAngle);
-    //     float angleV = UnityEngine.Random.Range(minAngle, maxAngle);
-    //     float distance = UnityEngine.Random.Range(minDistance, maxDistance);
 
-    //     Vector3 position = CalculatePosition(angleH, angleV, distance);
-    //     Quaternion rotation = Quaternion.LookRotation(targetPoint.position - position);
-    //     return (position, rotation);
-    // }
+    if(manualPilot){
+        manualPilotMove();
+    }
+}
 
-    // Vector3 CalculatePosition(float angleH, float angleV, float distance) {
-    //         // Convert angles from degrees to radians
-    //         float theta = angleV * Mathf.Deg2Rad; // Vertical angle
-    //         float phi = angleH * Mathf.Deg2Rad; // Horizontal angle
-
-    //         // Calculate Cartesian coordinates
-    //         float x = distance * Mathf.Sin(theta) * Mathf.Cos(phi);
-    //         float y = distance * Mathf.Cos(theta);
-    //         float z = distance * Mathf.Sin(theta) * Mathf.Sin(phi);
-
-    //         // Create position vector relative to the target's position
-    //         Vector3 position = new Vector3(x, y, z) + targetPoint.position;
-
-    //         return position;
-    //     }
     
-
     private void manualPilotMove() {
         if (Input.GetMouseButton(0)){
                 lastMouse = Input.mousePosition - lastMouse ;
