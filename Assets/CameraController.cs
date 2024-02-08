@@ -70,6 +70,9 @@ public class FlyCamera : MonoBehaviour {
 
     // public float updateInterval = 0.1f;
 
+    public Vector3 minBounds = new Vector3(-7.5f, -4.0f, -7.5f); // Replace with your calculated min values
+    public Vector3 maxBounds = new Vector3(7.5f, 0.5f, 7.5f);   // Replace with your calculated max values
+
     void Start () {
         // secondsPerRotation = (360.0f - (4 * exclusionAngle)) / degreesPerSecond;
         float x = UnityEngine.Random.Range(minBounds.x, maxBounds.x);
@@ -79,8 +82,7 @@ public class FlyCamera : MonoBehaviour {
     }
 
 
-    public Vector3 minBounds = new Vector3(-7.5f, -1.5f, -7.5f); // Replace with your calculated min values
-    public Vector3 maxBounds = new Vector3(7.5f, 0.0f, 7.5f);   // Replace with your calculated max values
+    
 
     public float updateInterval = 0.5f; // Time interval for position update
 
