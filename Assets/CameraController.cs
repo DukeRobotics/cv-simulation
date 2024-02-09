@@ -86,8 +86,8 @@ public class FlyCamera : MonoBehaviour {
     // secondsPerRotation = 0.1f;
     public float minRadius = 1f;
     public float maxRadius = 7.5f;
-    public float minPolarAngle = 150f; // To avoid direct top view
-    public float maxPolarAngle = 210f; // To avoid direct bottom view
+    public float minPolarAngle = 45; // To avoid direct top view
+    public float maxPolarAngle = 135; // To avoid direct bottom view
 
     void Update () {
         secondsPerRotation = 0.1F;
@@ -99,11 +99,11 @@ public class FlyCamera : MonoBehaviour {
             float polarAngle = UnityEngine.Random.Range(minPolarAngle, maxPolarAngle) * Mathf.Deg2Rad; // Convert to radians
             
             int flip = UnityEngine.Random.Range(0,2);
-            polarAngle = polarAngle + (flip * 180);
+            // polarAngle = polarAngle + (flip * 180);
 
             // Convert polar to Cartesian coordinates
-            float x = radius * Mathf.Cos(polarAngle);
-            float z = radius * Mathf.Sin(polarAngle);
+            float x = radius * Mathf.Sin(polarAngle);
+            float z = radius * Mathf.Cos(polarAngle);
             float y = UnityEngine.Random.Range(minBounds.y, maxBounds.y);
 
             Vector3 randomPosition = new Vector3(x, y, z);
