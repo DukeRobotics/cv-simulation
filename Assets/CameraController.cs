@@ -36,18 +36,6 @@ public class FlyCamera : MonoBehaviour {
     public float degreesPerSecond = 72.0f;
     float secondsPerRotation;
 
-    public float minZ = -7.0f;
-    public float maxZ = -2.0f;
-    public float zIncrement = 1.0f;
-
-    public float minY = -3.8f;
-    public float maxY = -0.8f;
-    public float yIncrement = 1.0f;
-
-    public float minX = 0.0f;
-    public float maxX = 5.0f;
-    public float xIncrement = 1.0f;
-
     public float exclusionAngle = 20.0f;
 
     // public float minExcludeZ = -1.0f;
