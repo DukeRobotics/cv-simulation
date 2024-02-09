@@ -69,9 +69,6 @@ public class FlyCamera : MonoBehaviour {
         Vector3 startingPos = new Vector3(x, y, z);
     }
 
-
-    
-
     public float updateInterval = 0.5f; // Time interval for position update
 
     /* ((x, y, z), (row, pitch, yaw))
@@ -87,39 +84,55 @@ public class FlyCamera : MonoBehaviour {
 
 
     // secondsPerRotation = 0.1f;
+    public float minRadius = 1f;
+    public float maxRadius = 7.5f;
+    public float minPolarAngle = 150f; // To avoid direct top view
+    public float maxPolarAngle = 210f; // To avoid direct bottom view
 
     void Update () {
-    secondsPerRotation = 0.1F;
+        secondsPerRotation = 0.1F;
 
-    if (Time.fixedTime >= nextUpdateTime) {
-        // Generate a random position within bounds
-        float x = UnityEngine.Random.Range(minBounds.x, maxBounds.x);
-        float y = UnityEngine.Random.Range(minBounds.y, maxBounds.y);
-        float z = UnityEngine.Random.Range(minBounds.z, maxBounds.z);
-        Vector3 randomPosition = new Vector3(x, y, z);
+        if (Time.fixedTime >= nextUpdateTime) {
+            // Generate a random position within bounds
+            // Generate random polar coordinates
+            float radius = UnityEngine.Random.Range(minRadius, maxRadius);
+            float polarAngle = UnityEngine.Random.Range(minPolarAngle, maxPolarAngle) * Mathf.Deg2Rad; // Convert to radians
+            
+            int flip = UnityEngine.Random.Range(0,2);
+            polarAngle = polarAngle + (flip * 180);
 
-        // Set the camera's position
-        transform.position = randomPosition;
-        
-        // Initially orient camera towards the target
-        transform.LookAt(target.transform);
+            // Convert polar to Cartesian coordinates
+            float x = radius * Mathf.Cos(polarAngle);
+            float z = radius * Mathf.Sin(polarAngle);
+            float y = UnityEngine.Random.Range(minBounds.y, maxBounds.y);
 
-        // Apply random deviation
-        float horizontalDeviation = UnityEngine.Random.Range(-30f, 30f); // Adjust deviation range as needed
-        float verticalDeviation = UnityEngine.Random.Range(-30f, 30f); // Adjust deviation range as needed
-        transform.Rotate(Vector3.up, horizontalDeviation, Space.World);
-        transform.Rotate(Vector3.right, verticalDeviation, Space.Self);
+            Vector3 randomPosition = new Vector3(x, y, z);
 
-        // Schedule the next update
-        nextUpdateTime += secondsPerRotation;
+            // Set the camera's position
+            transform.position = randomPosition;
+            
+            // Initially orient camera towards the target
+            transform.LookAt(target.transform);
+
+            // // Apply random deviation for yaw (horizontal) and pitch (vertical)
+            // float horizontalDeviation = UnityEngine.Random.Range(-30f, 30f); // Yaw deviation
+            // float verticalDeviation = UnityEngine.Random.Range(-30f, 30f); // Pitch deviation
+            // transform.Rotate(Vector3.up, horizontalDeviation, Space.World); // Yaw
+            // transform.Rotate(Vector3.right, verticalDeviation, Space.Self); // Pitch
+
+            // // Apply random deviation for roll
+            // float rollDeviation = UnityEngine.Random.Range(-30f, 30f); // Roll deviation
+            // transform.Rotate(Vector3.forward, rollDeviation, Space.Self); // Roll
+
+            // Schedule the next update
+            nextUpdateTime += secondsPerRotation;
+        }
+
+        if(manualPilot){
+            manualPilotMove();
+        }
     }
 
-    if(manualPilot){
-        manualPilotMove();
-    }
-}
-
-    
     private void manualPilotMove() {
         if (Input.GetMouseButton(0)){
                 lastMouse = Input.mousePosition - lastMouse ;

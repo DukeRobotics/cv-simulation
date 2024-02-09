@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 1039.5128, g: 1074.8937, b: 1543.6077, a: 1}
+  m_IndirectSpecularColor: {r: 1038.3468, g: 1074.4357, b: 1544.5079, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6060,6 +6060,14 @@ MonoBehaviour:
   xIncrement: 0.5
   exclusionAngle: 50
   startingPositionIndex: 0
+  minAngle: -90
+  maxAngle: 90
+  minDistance: 0
+  maxDistance: 2
+  minBounds: {x: -7.5, y: -4, z: -7.5}
+  maxBounds: {x: 7.5, y: 0.5, z: 7.5}
+  updateInterval: 0.5
+  distanceFromTarget: 0
 --- !u!1 &1824537895
 GameObject:
   m_ObjectHideFlags: 0
@@ -6095,7 +6103,7 @@ MonoBehaviour:
   constants:
     randomSeed: 539662031
     startIteration: 0
-    iterationCount: 99
+    iterationCount: 999
     totalIterations: 100
     instanceCount: 1
     instanceIndex: 0
