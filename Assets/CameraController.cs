@@ -58,7 +58,7 @@ public class FlyCamera : MonoBehaviour {
 
     // public float updateInterval = 0.1f;
 
-    public Vector3 minBounds = new Vector3(-7.5f, -4.0f, -7.5f); // Replace with your calculated min values
+    public Vector3 minBounds = new Vector3(-7.5f, -3.5f, -7.5f); // Replace with your calculated min values
     public Vector3 maxBounds = new Vector3(7.5f, 0.5f, 7.5f);   // Replace with your calculated max values
 
     void Start () {
@@ -69,7 +69,7 @@ public class FlyCamera : MonoBehaviour {
         Vector3 startingPos = new Vector3(x, y, z);
     }
 
-    public float updateInterval = 0.5f; // Time interval for position update
+    public float updateInterval = 1/12f; // Time interval for position update
 
     /* ((x, y, z), (row, pitch, yaw))
      *  We need all 6dof because we vary all of them
