@@ -47,7 +47,7 @@ public class FlyCamera : MonoBehaviour {
     List<Vector3> startingPositions = new List<Vector3>();
     public int startingPositionIndex = 0;
 
-    float nextUpdateTime = 0.1f;
+    public float nextUpdateTime = 0.1f;
 
     int interval;
 
@@ -56,9 +56,7 @@ public class FlyCamera : MonoBehaviour {
     public float minDistance = 0f;
     public float maxDistance = 2f;
 
-    // public float updateInterval = 0.1f;
-
-    public Vector3 minBounds = new Vector3(-7.5f, -3.5f, -7.5f); // Replace with your calculated min values
+    public Vector3 minBounds = new Vector3(-7.5f, -4.0f, -7.5f); // Replace with your calculated min values
     public Vector3 maxBounds = new Vector3(7.5f, 0.5f, 7.5f);   // Replace with your calculated max values
 
     void Start () {
@@ -68,8 +66,6 @@ public class FlyCamera : MonoBehaviour {
         float z = UnityEngine.Random.Range(minBounds.z, maxBounds.z);
         Vector3 startingPos = new Vector3(x, y, z);
     }
-
-    public float updateInterval = 1/12f; // Time interval for position update
 
     /* ((x, y, z), (row, pitch, yaw))
      *  We need all 6dof because we vary all of them
