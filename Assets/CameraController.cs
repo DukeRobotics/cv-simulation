@@ -34,7 +34,7 @@ public class FlyCamera : MonoBehaviour {
     // x: 0 to 7, increments of 1
 
     public float degreesPerSecond = 72.0f;
-    float secondsPerRotation;
+    public float secondsPerRotation = 0.01666667;
 
     public float exclusionAngle = 20.0f;
 
@@ -86,8 +86,6 @@ public class FlyCamera : MonoBehaviour {
     public float maxPolarAngle = 135; // To avoid direct bottom view
 
     void Update () {
-        secondsPerRotation = 0.1F;
-
         if (Time.fixedTime >= nextUpdateTime) {
             // Generate a random position within bounds
             // Generate random polar coordinates
