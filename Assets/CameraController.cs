@@ -18,31 +18,15 @@ public class FlyCamera : MonoBehaviour {
 
 
     public bool autoPilot = false;
-    // float radius = 7.0f;
-    // float thetaRadians = 3.0f * (float) Math.PI / 2.0f;
-    // float thetaIncrementDegrees = 10.0f;
-    // float thetaIncrementRadians = 10.0f * (float) Math.PI / 180.0f;
 
     public GameObject target;
 
     Transform targetPoint;
 
-    // Vector3[] targets = {new Vector3(0, -2.35, 0), new Vector3(0, -1.35, 0), new Vector(0, -0.35, 0), new Vector(1, -2.35, 0), new Vector(2, -2.35, 0), new Vector(3, -2.35 ) }
-
-    // z: -7 to -2, increments of 1
-    // y: -3.8 to -0.8, increments of 1
-    // x: 0 to 7, increments of 1
-
     public float degreesPerSecond = 72.0f;
     public float secondsPerRotation = 0.01666667f;
 
     public float exclusionAngle = 20.0f;
-
-    // public float minExcludeZ = -1.0f;
-    // public float maxExcludeZ = 1.0f;
-
-    // float minExcludeZ = 0.0f;
-    // float maxExcludeZ = 0.0f;
 
     List<Vector3> startingPositions = new List<Vector3>();
     public int startingPositionIndex = 0;
@@ -60,7 +44,6 @@ public class FlyCamera : MonoBehaviour {
     public Vector3 maxBounds = new Vector3(7.5f, 0.5f, 7.5f);   // Replace with your calculated max values
 
     void Start () {
-        // secondsPerRotation = (360.0f - (4 * exclusionAngle)) / degreesPerSecond;
         float x = UnityEngine.Random.Range(minBounds.x, maxBounds.x);
         float y = UnityEngine.Random.Range(minBounds.y, maxBounds.y);
         float z = UnityEngine.Random.Range(minBounds.z, maxBounds.z);
@@ -93,7 +76,6 @@ public class FlyCamera : MonoBehaviour {
             float polarAngle = UnityEngine.Random.Range(minPolarAngle, maxPolarAngle) * Mathf.Deg2Rad; // Convert to radians
             
             int flip = UnityEngine.Random.Range(0,2);
-            // polarAngle = polarAngle + (flip * 180);
 
             // Convert polar to Cartesian coordinates
             float x = radius * Mathf.Sin(polarAngle);
@@ -109,14 +91,14 @@ public class FlyCamera : MonoBehaviour {
             transform.LookAt(target.transform);
 
             // // Apply random deviation for yaw (horizontal) and pitch (vertical)
-            // float horizontalDeviation = UnityEngine.Random.Range(-30f, 30f); // Yaw deviation
-            // float verticalDeviation = UnityEngine.Random.Range(-30f, 30f); // Pitch deviation
-            // transform.Rotate(Vector3.up, horizontalDeviation, Space.World); // Yaw
-            // transform.Rotate(Vector3.right, verticalDeviation, Space.Self); // Pitch
+            float horizontalDeviation = UnityEngine.Random.Range(-20f, 20f); // Yaw deviation
+            float verticalDeviation = UnityEngine.Random.Range(-20f, 20f); // Pitch deviation
+            transform.Rotate(Vector3.up, horizontalDeviation, Space.World); // Yaw
+            transform.Rotate(Vector3.right, verticalDeviation, Space.Self); // Pitch
 
             // // Apply random deviation for roll
-            // float rollDeviation = UnityEngine.Random.Range(-30f, 30f); // Roll deviation
-            // transform.Rotate(Vector3.forward, rollDeviation, Space.Self); // Roll
+            float rollDeviation = UnityEngine.Random.Range(-20f, 20f); // Roll deviation
+            transform.Rotate(Vector3.forward, rollDeviation, Space.Self); // Roll
 
             // Schedule the next update
             nextUpdateTime += secondsPerRotation;
