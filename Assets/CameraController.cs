@@ -34,7 +34,7 @@ public class FlyCamera : MonoBehaviour {
     // x: 0 to 7, increments of 1
 
     public float degreesPerSecond = 72.0f;
-    public float secondsPerRotation = 0.01666667;
+    public float secondsPerRotation = 0.01666667f;
 
     public float exclusionAngle = 20.0f;
 
