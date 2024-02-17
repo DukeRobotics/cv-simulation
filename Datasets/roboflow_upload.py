@@ -1,4 +1,4 @@
-from typing_extensions import TypedDict 
+from typing_extensions import TypedDict
 from roboflow import Roboflow
 import pathlib
 import yaml
@@ -46,38 +46,39 @@ def create_roboflow_project_config_file():
 def load_roboflow_config():
     """
     Load the Roboflow configuration file as a dictionary.
-    
+
     Raises:
         SystemExit: If the schema of the configuration file is invalid.
     """
     # Load file
     with open(ROBOFLOW_CONFIG_FILE, "r") as file:
         config = yaml.load(file, Loader=yaml.FullLoader)
-    
+
     # Runtime type check
     SomeDictValidator = TypeAdapter(RoboflowConfig)
     try:
         return SomeDictValidator.validate_python(config)
-    except ValidationError as e: 
+    except ValidationError as e:
         raise SystemExit(f"Invalid schema for {ROBOFLOW_CONFIG_FILE.name}. {e}")
+
 
 def upload_dataset(config: RoboflowConfig, dataset_path: pathlib):
     """
     Upload a dataset to Roboflow.
     """
     NUM_RETRY_UPLOADS = 5
-    
+
     # Initialize Roboflow client
     rf = Roboflow(api_key=config["api_key"])
     project = rf.workspace(config["workspace"]).project(config["project"])
-    
+
     # Annotation file path and format (e.g., .coco.json)
     annotation_filename = dataset_path / "bbox.json"
 
     # Upload images
-    image_glob = (dataset_path / "images").glob('*.png')
+    image_glob = (dataset_path / "images").glob("*.png")
 
-    success_path = (dataset_path / "success")
+    success_path = dataset_path / "success"
     success_path.mkdir(parents=True, exist_ok=True)
 
     for image_path in image_glob:
@@ -87,19 +88,25 @@ def upload_dataset(config: RoboflowConfig, dataset_path: pathlib):
             NUM_RETRY_UPLOADS=NUM_RETRY_UPLOADS,
         )
         print(results)
-        
-        if results.get("image").get("success") is True and results.get("annotation").get("success") is True:
+
+        if (
+            results.get("image").get("success") is True
+            and results.get("annotation").get("success") is True
+        ):
             image_path.rename(success_path / image_path.name)
+
 
 if __name__ == "__main__":
     if not (ROBOFLOW_CONFIG_FILE).exists():
         create_roboflow_project_config_file()
-        raise SystemExit(f"Missing {ROBOFLOW_CONFIG_FILE.name} file. Please fill in the required fields.")
+        raise SystemExit(
+            f"Missing {ROBOFLOW_CONFIG_FILE.name} file. Please fill in the required fields."
+        )
 
     parser = argparse.ArgumentParser(description="Upload a dataset to Roboflow.")
     parser.add_argument("dataset_path", help="Path to the dataset to upload.")
     config: RoboflowConfig = load_roboflow_config()
 
     args = parser.parse_args()
-    
+
     upload_dataset(config, pathlib.Path(args.dataset_path))
