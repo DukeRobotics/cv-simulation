@@ -5,6 +5,8 @@ import yaml
 import argparse
 import textwrap
 from pydantic import TypeAdapter, ValidationError
+import concurrent.futures
+import functools
 
 DATASETS_PATH = pathlib.Path(__file__).parent.resolve()
 ROBOFLOW_CONFIG_FILE = DATASETS_PATH / "roboflow_config.yaml"
@@ -62,11 +64,26 @@ def load_roboflow_config():
         raise SystemExit(f"Invalid schema for {ROBOFLOW_CONFIG_FILE.name}. {e}")
 
 
+def upload_image(image_path: pathlib.Path, project: Roboflow, annotation_filename: str, success_path: pathlib.Path):
+    NUM_RETRY_UPLOADS = 5
+    results = project.single_upload(
+        image_path=str(image_path),
+        annotation_path=annotation_filename.resolve(),
+        NUM_RETRY_UPLOADS=NUM_RETRY_UPLOADS,
+    )
+    print(results)
+
+    if (
+        results.get("image").get("success") is True
+        and results.get("annotation").get("success") is True
+    ):
+        image_path.rename(success_path / image_path.name)
+
+
 def upload_dataset(config: RoboflowConfig, dataset_path: pathlib):
     """
     Upload a dataset to Roboflow.
     """
-    NUM_RETRY_UPLOADS = 5
 
     # Initialize Roboflow client
     rf = Roboflow(api_key=config["api_key"])
@@ -81,19 +98,14 @@ def upload_dataset(config: RoboflowConfig, dataset_path: pathlib):
     success_path = dataset_path / "success"
     success_path.mkdir(parents=True, exist_ok=True)
 
-    for image_path in image_glob:
-        results = project.single_upload(
-            image_path=str(image_path),
-            annotation_path=annotation_filename.resolve(),
-            NUM_RETRY_UPLOADS=NUM_RETRY_UPLOADS,
+    with concurrent.futures.ProcessPoolExecutor() as executor:
+        upload_image_closed = functools.partial(
+            upload_image,
+            project=project,
+            annotation_filename=annotation_filename,
+            success_path=success_path,
         )
-        print(results)
-
-        if (
-            results.get("image").get("success") is True
-            and results.get("annotation").get("success") is True
-        ):
-            image_path.rename(success_path / image_path.name)
+        executor.map(upload_image_closed, list(image_glob))
 
 
 if __name__ == "__main__":
