@@ -12,10 +12,9 @@ ROBOFLOW_CONFIG_FILE = DATASETS_PATH / "roboflow_config.yaml"
 
 class RoboflowConfig(TypedDict):
     api_key: str
-    
+
     workspace: str
     project: str
-
 
 
 def create_roboflow_project_config_file():
@@ -103,4 +102,4 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     
-    upload_dataset(config, pathlib.Path(args.dataset_path), args.batch)
+    upload_dataset(config, pathlib.Path(args.dataset_path))
