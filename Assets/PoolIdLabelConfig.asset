@@ -31,5 +31,8 @@ MonoBehaviour:
   - label: gate_earth
     id: 5
     hierarchyRelation: 0
+  - label: buoy_whole
+    id: 6
+    hierarchyRelation: 0
   autoAssignIds: 1
   startingLabelId: 0
