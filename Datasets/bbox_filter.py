@@ -58,8 +58,9 @@ def filter(filename: pathlib.Path):
 
         superdirectory["annotations"] = export_jsons
         # Write the dictionary to a JSON file
-        with open("bbox2.json", "w") as file:
+        with open(filename, "w") as file:
             json.dump(superdirectory, file, indent=4)
+        print("Success")
         
 
 if __name__ == "__main__":
