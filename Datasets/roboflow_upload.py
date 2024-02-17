@@ -98,7 +98,7 @@ def upload_dataset(config: RoboflowConfig, dataset_path: pathlib):
     success_path = dataset_path / "success"
     success_path.mkdir(parents=True, exist_ok=True)
 
-    with concurrent.futures.ProcessPoolExecutor() as executor:
+    with concurrent.futures.ThreadPoolExecutor() as executor:
         upload_image_closed = functools.partial(
             upload_image,
             project=project,
