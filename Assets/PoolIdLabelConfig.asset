@@ -37,5 +37,8 @@ MonoBehaviour:
   - label: gate_whole
     id: 7
     hierarchyRelation: 0
+  - label: gate_tick
+    id: 8
+    hierarchyRelation: 0
   autoAssignIds: 1
   startingLabelId: 0
