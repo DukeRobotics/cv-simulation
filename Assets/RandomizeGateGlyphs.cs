@@ -14,12 +14,17 @@ public class RandomizeGateGlyphs : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        float randomRotationDeg1 = UnityEngine.Random.Range(-30, 30);
+        float randomRotationDeg2 = UnityEngine.Random.Range(-30, 30);
+
         int firstMaterialIndex = Random.Range(0, 2);
         var renderer1 = frontGlyphs[0].GetComponent<Renderer>();
         var labeling1 = renderer1.GetComponent<UnityEngine.Perception.GroundTruth.LabelManagement.Labeling>();
         renderer1.material = materials[firstMaterialIndex];
+        renderer1.transform.localEulerAngles = new Vector3(180, 180+randomRotationDeg1, 180);
         renderer1 = frontGlyphs[1].GetComponent<Renderer>();
         renderer1.material = materials[1 - firstMaterialIndex];
+        renderer1.transform.localEulerAngles = new Vector3(180, 180+randomRotationDeg2, 180);
         labeling1.labels.Clear();
         labeling1.labels.Add(labels[firstMaterialIndex]);
         labeling1.RefreshLabeling();
@@ -28,8 +33,10 @@ public class RandomizeGateGlyphs : MonoBehaviour
         var renderer2 = backGlyphs[0].GetComponent<Renderer>();
         var labeling2 = renderer1.GetComponent<UnityEngine.Perception.GroundTruth.LabelManagement.Labeling>();
         renderer2.material = materials[secondMaterialIndex];
+        renderer2.transform.localEulerAngles = new Vector3(0, randomRotationDeg1, 180);
         renderer2 = backGlyphs[1].GetComponent<Renderer>();
         renderer2.material = materials[1 - secondMaterialIndex];
+        renderer2.transform.localEulerAngles = new Vector3(0, randomRotationDeg2, 180);
         labeling2.labels.Clear();
         labeling2.labels.Add(labels[1-firstMaterialIndex]);
         labeling2.RefreshLabeling();
@@ -38,12 +45,17 @@ public class RandomizeGateGlyphs : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        float randomRotationDeg1 = UnityEngine.Random.Range(-20, 20);
+        float randomRotationDeg2 = UnityEngine.Random.Range(-20, 20);
+
         int firstMaterialIndex = Random.Range(0, 2);
         var renderer1 = frontGlyphs[0].GetComponent<Renderer>();
         var labeling1 = renderer1.GetComponent<UnityEngine.Perception.GroundTruth.LabelManagement.Labeling>();
         renderer1.material = materials[firstMaterialIndex];
+        renderer1.transform.localEulerAngles = new Vector3(180, 180+randomRotationDeg1, 180);
         renderer1 = frontGlyphs[1].GetComponent<Renderer>();
         renderer1.material = materials[1 - firstMaterialIndex];
+        renderer1.transform.localEulerAngles = new Vector3(180, 180+randomRotationDeg2, 180);
         labeling1.labels.Clear();
         labeling1.labels.Add(labels[firstMaterialIndex]);
         labeling1.RefreshLabeling();
@@ -52,8 +64,10 @@ public class RandomizeGateGlyphs : MonoBehaviour
         var renderer2 = backGlyphs[0].GetComponent<Renderer>();
         var labeling2 = renderer1.GetComponent<UnityEngine.Perception.GroundTruth.LabelManagement.Labeling>();
         renderer2.material = materials[secondMaterialIndex];
+        renderer2.transform.localEulerAngles = new Vector3(0, randomRotationDeg1, 180);
         renderer2 = backGlyphs[1].GetComponent<Renderer>();
         renderer2.material = materials[1 - secondMaterialIndex];
+        renderer2.transform.localEulerAngles = new Vector3(0, randomRotationDeg2, 180);
         labeling2.labels.Clear();
         labeling2.labels.Add(labels[1-firstMaterialIndex]);
         labeling2.RefreshLabeling();
