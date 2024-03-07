@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 3527.811, g: 2910.7502, b: 2332.5432, a: 1}
+  m_IndirectSpecularColor: {r: 3526.7427, g: 2909.639, b: 2331.1838, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3492,7 +3492,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &752371334
 Transform:
   m_ObjectHideFlags: 0
@@ -5602,6 +5602,62 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1468625116}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1495361459
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1495361461}
+  - component: {fileID: 1495361460}
+  m_Layer: 0
+  m_Name: RandomizeGateGlyphs
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1495361460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1495361459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8547d8de7ebe31e44a4929fce172bfd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frontGlyphs:
+  - {fileID: 1194697839}
+  - {fileID: 1217165738}
+  backGlyphs:
+  - {fileID: 671592799}
+  - {fileID: 363020966}
+  labels:
+  - gate_abydos
+  - gate_earth
+  materials:
+  - {fileID: 2100000, guid: f0dd53cb908084da28b90abe7abd4354, type: 2}
+  - {fileID: 2100000, guid: 7cb55191f78494d2b82d9e7977fe57fa, type: 2}
+--- !u!4 &1495361461
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1495361459}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 8.013981, y: 1.0602139, z: -1.0978917}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1628452229
 GameObject:
   m_ObjectHideFlags: 0
@@ -7656,3 +7712,4 @@ SceneRoots:
   - {fileID: 1685488703}
   - {fileID: 622119919}
   - {fileID: 1806343066}
+  - {fileID: 1495361461}
