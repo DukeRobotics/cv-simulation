@@ -7,15 +7,15 @@ The simulation was built using Unity 2022 LTS. It uses the HDRP render pipeline 
 
 The simulation is setup to generate synthetic images of the gate and buoy with automatically generated bounding boxes for the RoboSub 2023 glyphs. The simulation occurs underwater, in a simulated swimming pool with murky water.
 
-When the simulation is run, the camera is moved in a circle around the gate/buoy that is parallel to the pool floor. Every time the camera completes a circle, its radius is decreased. When the circle reaches the minimum specified radius, its height is increased and the process repeats. This ensures that the camera captures the gate and buoy from a variety of distances and angles.
-
-In addition to the camera movements, the sun's position is randomized, and the gate's hue and the buoy's glyph orientations are randomized. This ensures that the camera captures the gate and buoy under a variety of lighting conditions, with a variety of colors for the gate, and with a variety of orientations for the buoy glyphs.
+The camera captures the gate and buoy from a variety of distances and angles. In addition to the camera movements, the sun's position, buoy and gate glyphs, and gate boxes are also randomized. This ensures that the camera captures the gate and buoy under a variety of different conditions leading to a more robust CV model.
 
 ## Code Overview
 The code is written in C# in the following files:
 - [CameraController.cs](/Assets/CameraController.cs): Controls the camera movements.
-- [RandomizedGateHue.cs](/Assets/RandomizedGateHue.cs): Randomizes the hue of the gate.
+- [RandomizedGateHue.cs](/Assets/RandomizeGateHue.cs): Randomizes the hue of the gate.
 - [RotateGlyphs.cs](/Assets/RotateGlyphs.cs): Randomizes the orientation of the buoy glyphs.
+- [RandomizeGateGlyphs.cs](/Assets/RandomizeGateGlyphs.cs): Randomizes the order and orientation of the gate glyphs.
+- [RandomizeBoxes.cs](/Assets/RandomizeBoxes.cs): Randomizes the order of the gate boxes.
 - [Sun.cs](/Assets/Sun.cs): Randomizes the sun's position.
 
 ## Dependencies
@@ -77,3 +77,10 @@ solo2yolo "Datasets/<SOLO Dataset>" <Output Path>
 ```
 
 Many converters exist to convert COCO to other formats.
+
+## Uploading to Roboflow
+Upload the generated dataset to [Roboflow](https://roboflow.com) to easily train a model or share the dataset with others.
+
+```python
+python Datasets/roboflow_upload.py <dataset_path>
+```
