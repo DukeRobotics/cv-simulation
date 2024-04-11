@@ -1294,7 +1294,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   labels:
-  - gate_earth
+  - gate_blue
   useAutoLabeling: 0
   autoLabelingSchemeType: 
 --- !u!64 &430731025
@@ -1553,7 +1553,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   labels:
-  - gate_abydos
+  - gate_red
   useAutoLabeling: 0
   autoLabelingSchemeType: 
 --- !u!64 &522268713
@@ -5803,17 +5803,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   frontGlyphs:
-  - {fileID: 1194697839}
-  - {fileID: 1217165738}
+  - {fileID: 430731022}
+  - {fileID: 1661698457}
   backGlyphs:
-  - {fileID: 671592799}
-  - {fileID: 363020966}
+  - {fileID: 2008461793}
+  - {fileID: 522268710}
   labels:
-  - gate_abydos
-  - gate_earth
+  - gate_blue
+  - gate_red
   materials:
-  - {fileID: 2100000, guid: f0dd53cb908084da28b90abe7abd4354, type: 2}
-  - {fileID: 2100000, guid: 7cb55191f78494d2b82d9e7977fe57fa, type: 2}
+  - {fileID: 2100000, guid: 336fea03aef2062458be098a540c7f48, type: 2}
+  - {fileID: 2100000, guid: aacb87765df292f4995442e70ef32ec7, type: 2}
 --- !u!4 &1495361461
 Transform:
   m_ObjectHideFlags: 0
@@ -6150,7 +6150,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b33f0bc2b78db642a758f07826d0dd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  labels: []
+  labels:
+  - gate_red
   useAutoLabeling: 0
   autoLabelingSchemeType: 
 --- !u!64 &1661698460
@@ -7048,7 +7049,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   labels:
-  - gate_earth
+  - gate_blue
   useAutoLabeling: 0
   autoLabelingSchemeType: 
 --- !u!64 &2008461796
