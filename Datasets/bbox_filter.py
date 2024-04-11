@@ -17,7 +17,7 @@ class ImageWithBBoxes:
         self.max_area = float("-inf")
 
         for bbox in bboxes:
-            if bbox["area"] >= self.max_area:
+            if bbox["area"] >= self.max_area and bbox["category_id"] != 6:
                 self.max_area = bbox["area"]
             self.bboxes[bbox["id"]] = bbox
 
