@@ -27,7 +27,9 @@ class ImageWithBBoxes:
     def filter(self):
         # remove = [self.bboxes[bbox]["id"] for bbox in self.bboxes if self.bboxes[bbox]["area"] <= (0.1 * self.max_area) or self.bboxes[bbox]["area"] == 1]
         remove = [self.bboxes[bbox]["id"] for bbox in self.bboxes if self.bboxes[bbox]["area"] == 1]
-        for id in remove: del self.bboxes[id]
+        for id in remove:
+            print(f"Removed id {id}")
+            del self.bboxes[id]
 
     def export(self):
         return [self.bboxes[id] for id in self.bboxes]
