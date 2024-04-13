@@ -106,5 +106,5 @@ python roboflow_upload.py coco
 ```
 7. Export dataset from Roboflow in the `YOLO v7 PyTorch` format
 8. Train using [cv-training](https://github.com/DukeRobotics/cv-training)
-9. Convert weights to blob file using [tools.luxonis.com](https://tools.luxonis.com)
-10. Upload weights to cv-models in [robosub-ros](https://github.com/DukeRobotics/robosub-ros)
+9. Convert weights to a blob file using [tools.luxonis.com](https://tools.luxonis.com)
+10. Upload weights to [robosub-ros](https://github.com/DukeRobotics/robosub-ros)
