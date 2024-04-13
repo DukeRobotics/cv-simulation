@@ -11,11 +11,13 @@ public class RandomizeGateGlyphs : MonoBehaviour
 
     public List<Material> materials = new List<Material>();
 
+    public int GLYPH_ROTATION_BOUND = 0;
+
     // Start is called before the first frame update
     void Start()
     {
-        float randomRotationDeg1 = UnityEngine.Random.Range(-30, 30);
-        float randomRotationDeg2 = UnityEngine.Random.Range(-30, 30);
+        float randomRotationDeg1 = UnityEngine.Random.Range(-GLYPH_ROTATION_BOUND, GLYPH_ROTATION_BOUND);
+        float randomRotationDeg2 = UnityEngine.Random.Range(-GLYPH_ROTATION_BOUND, GLYPH_ROTATION_BOUND);
 
         int firstMaterialIndex = Random.Range(0, 2);
         var renderer1 = frontGlyphs[0].GetComponent<Renderer>();
@@ -45,8 +47,8 @@ public class RandomizeGateGlyphs : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float randomRotationDeg1 = UnityEngine.Random.Range(-20, 20);
-        float randomRotationDeg2 = UnityEngine.Random.Range(-20, 20);
+        float randomRotationDeg1 = UnityEngine.Random.Range(-GLYPH_ROTATION_BOUND, GLYPH_ROTATION_BOUND);
+        float randomRotationDeg2 = UnityEngine.Random.Range(-GLYPH_ROTATION_BOUND, GLYPH_ROTATION_BOUND);
 
         int firstMaterialIndex = Random.Range(0, 2);
         var renderer1 = frontGlyphs[0].GetComponent<Renderer>();
