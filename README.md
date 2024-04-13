@@ -84,3 +84,27 @@ Upload the generated dataset to [Roboflow](https://roboflow.com) to easily train
 ```python
 python Datasets/roboflow_upload.py <dataset_path>
 ```
+
+## Full Workflow for DAI Cameras
+1. Ensure that the game resolution is set to 416x416
+2. Generate images
+3. Convert to COCO
+```bash
+solo2coco solo coco
+```
+> [!NOTE]
+> `solo2coco` creates the real `coco` dataset inside an extraneous `coco` directory. In the following steps, either specify `coco/coco` or remove the unnecessary parent folder.
+
+4. Manually delete any bad images in `coco/images`
+5. Run bbox filter to remove bad annotations 
+```bash
+python bbox_filter.py coco
+```
+6. Upload to roboflow
+```bash
+python roboflow_upload.py coco
+```
+7. Export dataset from Roboflow in the `YOLO v7 PyTorch` format
+8. Train using [cv-training](https://github.com/DukeRobotics/cv-training)
+9. Convert weights to blob file using [tools.luxonis.com](https://tools.luxonis.com)
+10. Upload weights to cv-models in [robosub-ros](https://github.com/DukeRobotics/robosub-ros)
