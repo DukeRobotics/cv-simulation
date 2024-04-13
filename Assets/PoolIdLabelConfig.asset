@@ -25,26 +25,20 @@ MonoBehaviour:
   - label: buoy_earth_cetus
     id: 3
     hierarchyRelation: 0
-  - label: gate_abydos
+  - label: buoy_whole
     id: 4
     hierarchyRelation: 0
-  - label: gate_earth
+  - label: gate_whole
     id: 5
     hierarchyRelation: 0
-  - label: buoy_whole
+  - label: gate_tick
     id: 6
     hierarchyRelation: 0
-  - label: gate_whole
+  - label: gate_red
     id: 7
     hierarchyRelation: 0
-  - label: gate_tick
-    id: 8
-    hierarchyRelation: 0
-  - label: gate_red
-    id: 9
-    hierarchyRelation: 0
   - label: gate_blue
-    id: 10
+    id: 8
     hierarchyRelation: 0
   autoAssignIds: 1
   startingLabelId: 0
