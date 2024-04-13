@@ -25,7 +25,8 @@ class ImageWithBBoxes:
         self.filter()
 
     def filter(self):
-        remove = [self.bboxes[bbox]["id"] for bbox in self.bboxes if self.bboxes[bbox]["area"] <= (0.1 * self.max_area) or self.bboxes[bbox]["area"] == 1]
+        # remove = [self.bboxes[bbox]["id"] for bbox in self.bboxes if self.bboxes[bbox]["area"] <= (0.1 * self.max_area) or self.bboxes[bbox]["area"] == 1]
+        remove = [self.bboxes[bbox]["id"] for bbox in self.bboxes if self.bboxes[bbox]["area"] == 1]
         for id in remove: del self.bboxes[id]
 
     def export(self):
@@ -65,7 +66,7 @@ def filter(filename: pathlib.Path):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Upload a dataset to Roboflow.")
-    parser.add_argument("dataset_path", help="Path to the dataset to filter.", type=pathlib.Path)
+    parser.add_argument("dataset_path", help="Path to the COCO dataset to filter.", type=pathlib.Path)
 
     args = parser.parse_args()
 
