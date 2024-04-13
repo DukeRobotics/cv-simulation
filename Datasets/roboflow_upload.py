@@ -116,7 +116,7 @@ if __name__ == "__main__":
         )
 
     parser = argparse.ArgumentParser(description="Upload a dataset to Roboflow.")
-    parser.add_argument("dataset_path", help="Path to the dataset to upload.")
+    parser.add_argument("dataset_path", help="Path to the COCO dataset to upload.")
     config: RoboflowConfig = load_roboflow_config()
 
     args = parser.parse_args()
