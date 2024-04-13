@@ -11,7 +11,7 @@ public class RandomizeGateGlyphs : MonoBehaviour
 
     public List<Material> materials = new List<Material>();
 
-    public int GLYPH_ROTATION_BOUND = 0;
+    public int GLYPH_ROTATION_BOUND = 30;
 
     // Start is called before the first frame update
     void Start()
