@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 5038.9634, g: 3978.311, b: 2678.5706, a: 1}
+  m_IndirectSpecularColor: {r: 5034.0415, g: 3975.1938, b: 2677.7073, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1294,7 +1294,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   labels:
-  - gate_blue
+  - gate_red
   useAutoLabeling: 0
   autoLabelingSchemeType: 
 --- !u!64 &430731025
@@ -5814,7 +5814,7 @@ MonoBehaviour:
   materials:
   - {fileID: 2100000, guid: aacb87765df292f4995442e70ef32ec7, type: 2}
   - {fileID: 2100000, guid: 336fea03aef2062458be098a540c7f48, type: 2}
-  GLYPH_ROTATION_BOUND: 0
+  GLYPH_ROTATION_BOUND: 30
 --- !u!4 &1495361461
 Transform:
   m_ObjectHideFlags: 0
@@ -6152,7 +6152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   labels:
-  - gate_red
+  - gate_blue
   useAutoLabeling: 0
   autoLabelingSchemeType: 
 --- !u!64 &1661698460
