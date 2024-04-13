@@ -1260,7 +1260,7 @@ GameObject:
   - component: {fileID: 430731025}
   - component: {fileID: 430731024}
   m_Layer: 0
-  m_Name: GateBlueFront
+  m_Name: GateRedFront
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1339,7 +1339,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 326986db08f99fc41b5b9a214e998206, type: 2}
+  - {fileID: 2100000, guid: 0a7e8358d539bb14ca2805a821eb857f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1519,7 +1519,7 @@ GameObject:
   - component: {fileID: 522268713}
   - component: {fileID: 522268712}
   m_Layer: 0
-  m_Name: GateBlueBack
+  m_Name: GateRedBack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1598,7 +1598,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 326986db08f99fc41b5b9a214e998206, type: 2}
+  - {fileID: 2100000, guid: 0a7e8358d539bb14ca2805a821eb857f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5809,11 +5809,11 @@ MonoBehaviour:
   - {fileID: 522268710}
   - {fileID: 2008461793}
   labels:
-  - gate_blue
   - gate_red
+  - gate_blue
   materials:
-  - {fileID: 2100000, guid: 336fea03aef2062458be098a540c7f48, type: 2}
   - {fileID: 2100000, guid: aacb87765df292f4995442e70ef32ec7, type: 2}
+  - {fileID: 2100000, guid: 336fea03aef2062458be098a540c7f48, type: 2}
 --- !u!4 &1495361461
 Transform:
   m_ObjectHideFlags: 0
@@ -6117,7 +6117,7 @@ GameObject:
   - component: {fileID: 1661698460}
   - component: {fileID: 1661698459}
   m_Layer: 0
-  m_Name: GateRedFront
+  m_Name: GateBlueFront
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6196,7 +6196,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: aacb87765df292f4995442e70ef32ec7, type: 2}
+  - {fileID: 2100000, guid: 326986db08f99fc41b5b9a214e998206, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7015,7 +7015,7 @@ GameObject:
   - component: {fileID: 2008461796}
   - component: {fileID: 2008461795}
   m_Layer: 0
-  m_Name: GateRedBack
+  m_Name: GateBlueBack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7094,7 +7094,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0a7e8358d539bb14ca2805a821eb857f, type: 2}
+  - {fileID: 2100000, guid: 326986db08f99fc41b5b9a214e998206, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
