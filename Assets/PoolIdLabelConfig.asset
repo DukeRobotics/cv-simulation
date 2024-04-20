@@ -34,10 +34,10 @@ MonoBehaviour:
   - label: gate_tick
     id: 6
     hierarchyRelation: 0
-  - label: gate_red
+  - label: gate_red_cw
     id: 7
     hierarchyRelation: 0
-  - label: gate_blue
+  - label: gate_blue_ccw
     id: 8
     hierarchyRelation: 0
   autoAssignIds: 1

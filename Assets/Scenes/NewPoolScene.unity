@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 5035.9907, g: 3974.7192, b: 2672.965, a: 1}
+  m_IndirectSpecularColor: {r: 5038.9634, g: 3978.311, b: 2678.5667, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1294,7 +1294,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   labels:
-  - gate_red
+  - gate_red_cw
   useAutoLabeling: 0
   autoLabelingSchemeType: 
 --- !u!64 &430731025
@@ -1553,7 +1553,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   labels:
-  - gate_red
+  - gate_red_cw
   useAutoLabeling: 0
   autoLabelingSchemeType: 
 --- !u!64 &522268713
@@ -6152,7 +6152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   labels:
-  - gate_blue
+  - gate_blue_ccw
   useAutoLabeling: 0
   autoLabelingSchemeType: 
 --- !u!64 &1661698460
@@ -7050,7 +7050,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   labels:
-  - gate_blue
+  - gate_blue_ccw
   useAutoLabeling: 0
   autoLabelingSchemeType: 
 --- !u!64 &2008461796
