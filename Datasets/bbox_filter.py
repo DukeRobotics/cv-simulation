@@ -5,6 +5,7 @@ from collections import defaultdict
 
 DATASETS_PATH = pathlib.Path(__file__).parent.resolve()
 
+
 class ImageWithBBoxes:
     def __init__(self, bboxes):
         self.bboxes = defaultdict(dict)
@@ -24,12 +25,12 @@ class ImageWithBBoxes:
                 self.counts[image_id][category_id] += 1
 
             self.bboxes[bbox["id"]] = bbox
-        
+
         for image_id, category_ids in self.counts.items():
             for category_id, count in category_ids.items():
                 if count > 1:
                     print(image_id, category_id)
-      
+
         self.filter()
 
     def filter(self):
@@ -72,7 +73,7 @@ def filter(filename: pathlib.Path):
         # Write the dictionary to a JSON file
         with open(filename, "w") as file:
             json.dump(superdirectory, file, indent=4)
-        
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Filter COCO bounding boxes.")
