@@ -100,11 +100,11 @@ solo2coco solo coco
 ```bash
 python bbox_filter.py coco
 ```
-6. Upload to Roboflow
+6. Create new Roboflow project by duplicating null images
+7. Upload to this new Roboflow project
 ```bash
 python roboflow_upload.py coco
 ```
-7. Merge null images into Roboflow dataset
 8. Export dataset from Roboflow in the `YOLO v7 PyTorch` format
 9. Train using [cv-training](https://github.com/DukeRobotics/cv-training)
 10. Convert weights to a blob file using [tools.luxonis.com](https://tools.luxonis.com)
