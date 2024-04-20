@@ -18,7 +18,7 @@ class ImageWithBBoxes:
 
             if (category_id := bbox["category_id"]) not in self.max_area_by_category[image_id]:
                 self.max_area_by_category[image_id][category_id] = bbox["area"]
-                self.counts[image_id][category_id] = 0
+                self.counts[image_id][category_id] = 1
             else:
                 self.max_area_by_category[image_id][category_id] = max(self.max_area_by_category[image_id][category_id], bbox["area"])
                 self.counts[image_id][category_id] += 1
