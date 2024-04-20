@@ -9,13 +9,26 @@ class ImageWithBBoxes:
     def __init__(self, bboxes):
         self.bboxes = defaultdict(dict)
         self.max_area_by_category = {}
+        self.counts = {}
 
         for bbox in bboxes:
-            if (category_id := bbox["category_id"]) not in self.max_area_by_category:
-                self.max_area_by_category[category_id] = bbox["area"]
+            if (image_id := bbox["image_id"]) not in self.max_area_by_category:
+                self.max_area_by_category[image_id] = {}
+                self.counts[image_id] = {}
+
+            if (category_id := bbox["category_id"]) not in self.max_area_by_category[image_id]:
+                self.max_area_by_category[image_id][category_id] = bbox["area"]
+                self.counts[image_id][category_id] = 0
             else:
-                self.max_area_by_category[category_id] = max(self.max_area_by_category[category_id], bbox["area"])
+                self.max_area_by_category[image_id][category_id] = max(self.max_area_by_category[image_id][category_id], bbox["area"])
+                self.counts[image_id][category_id] += 1
+
             self.bboxes[bbox["id"]] = bbox
+        
+        for image_id, category_ids in self.counts.items():
+            for category_id, count in category_ids.items():
+                if count > 1:
+                    print(image_id, category_id)
       
         self.filter()
 
@@ -23,7 +36,7 @@ class ImageWithBBoxes:
         remove = []
         for id, bbox in self.bboxes.items():
             # Remove bboxes with area 1 or smaller duplicates
-            if bbox["area"] == 1 or bbox["area"] < self.max_area_by_category[bbox["category_id"]]:
+            if bbox["area"] <= 5 or bbox["area"] < self.max_area_by_category[bbox["image_id"]][bbox["category_id"]]:
                 remove.append(id)
 
         for id in remove:
