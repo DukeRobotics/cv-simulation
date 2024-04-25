@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 5038.9634, g: 3978.311, b: 2678.5667, a: 1}
+  m_IndirectSpecularColor: {r: 5038.9634, g: 3978.311, b: 2678.5627, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5814,8 +5814,8 @@ MonoBehaviour:
   - {fileID: 522268710}
   - {fileID: 2008461793}
   labels:
-  - gate_red
-  - gate_blue
+  - gate_red_cw
+  - gate_blue_ccw
   materials:
   - {fileID: 2100000, guid: aacb87765df292f4995442e70ef32ec7, type: 2}
   - {fileID: 2100000, guid: 336fea03aef2062458be098a540c7f48, type: 2}
