@@ -7,72 +7,91 @@ DATASETS_PATH = pathlib.Path(__file__).parent.resolve()
 
 
 class ImageWithBBoxes:
-    def __init__(self, bboxes):
-        self.bboxes = defaultdict(dict)
-        self.max_area_by_category = {}
-        self.counts = {}
+    """
+    Stores all bounding boxes for a single image.
+    """
+
+    def __init__(self, bboxes: "list[dict]", image_id: int):
+        """
+        Initializes the ImageWithBBoxes object.
+
+        Args:
+            bboxes: List of bounding boxes that have the same image_id.
+            image_id: The image_id of the image.
+        """
+        self.bboxes = defaultdict(dict)  # Maps bbox id to bbox
+        self.max_area = {}  # Maximum area bbox for each category
+        self.counts = {}  # Number of bboxes for each category
+        self.image_id = image_id  # image_id
 
         for bbox in bboxes:
-            if (image_id := bbox["image_id"]) not in self.max_area_by_category:
-                self.max_area_by_category[image_id] = {}
-                self.counts[image_id] = {}
-
-            if (category_id := bbox["category_id"]) not in self.max_area_by_category[image_id]:
-                self.max_area_by_category[image_id][category_id] = bbox["area"]
-                self.counts[image_id][category_id] = 1
-            else:
-                self.max_area_by_category[image_id][category_id] = max(self.max_area_by_category[image_id][category_id], bbox["area"])
-                self.counts[image_id][category_id] += 1
+            category_id = bbox["category_id"]
+            self.max_area[category_id] = max(self.max_area.get(category_id, 0), bbox["area"])
+            self.counts[category_id] = self.counts.get(category_id, 0) + 1
 
             self.bboxes[bbox["id"]] = bbox
 
-        for image_id, category_ids in self.counts.items():
-            for category_id, count in category_ids.items():
-                if count > 1:
-                    print(image_id, category_id)
-
-        self.filter()
-
     def filter(self):
+        """
+        Filter out bad bounding boxes.
+
+        The following bounding boxes are removed:
+        - Bounding boxes with area MAX_AREA or smaller
+        - All bounding boxes with area smaller than the maximum area for the same category
+        """
+        MAX_AREA = 5
+
+        # Identify bad bounding boxes
         remove = []
         for id, bbox in self.bboxes.items():
-            # Remove bboxes with area 1 or smaller duplicates
-            if bbox["area"] <= 5 or bbox["area"] < self.max_area_by_category[bbox["image_id"]][bbox["category_id"]]:
+            if bbox["area"] <= MAX_AREA or bbox["area"] < self.max_area[bbox["category_id"]]:
                 remove.append(id)
 
+        # Remove bad bounding boxes
         for id in remove:
             del self.bboxes[id]
 
-    def export(self):
-        return [self.bboxes[id] for id in self.bboxes]
+    def export(self) -> "list[dict]":
+        """
+        Returns:
+            List of bounding boxes for the image.
+        """
+        return list(self.bboxes.values())
 
 
-def filter(filename: pathlib.Path):
-    with open(filename, "r") as file:
-        # Parse the JSON file and convert it into a Python dictionary
-        superdirectory = json.load(file)
-        annotations = superdirectory["annotations"]
+def filter(bbox_path: pathlib.Path):
+    """
+    Filter the bounding boxes in a COCO dataset.
+
+    Args:
+        bbox_path: Path to the JSON file containing the bounding boxes.
+    """
+    with open(bbox_path, "r") as file:
+        # Parse the JSON file and convert it into a dictionary
+        super_dict = json.load(file)
+        annotations = super_dict["annotations"]
 
         # Collect all bounding boxes for the same image under one list
-        images_to_bbox = defaultdict(list)
+        raw_images = defaultdict(list)
         for bbox in annotations:
-            images_to_bbox[bbox["image_id"]].append(bbox)
+            raw_images[bbox["image_id"]].append(bbox)
 
-        # Convert into image objects
+        # Convert each image into an ImageWithBBoxes object
         images = []
-        for id in images_to_bbox:
-            images.append(ImageWithBBoxes(images_to_bbox[id]))
+        for image_id, image in raw_images.items():
+            images.append(ImageWithBBoxes(image, image_id))
 
         # Export each image
         export_jsons = []
         for image in images:
+            image.filter()
             bbox_list = image.export()
             export_jsons.extend(bbox_list)
-        superdirectory["annotations"] = export_jsons
+        super_dict["annotations"] = export_jsons
 
-        # Write the dictionary to a JSON file
-        with open(filename, "w") as file:
-            json.dump(superdirectory, file, indent=4)
+        # Write back the dictionary as JSON
+        with open(bbox_path, "w") as file:
+            json.dump(super_dict, file, indent=4)
 
 
 if __name__ == "__main__":
