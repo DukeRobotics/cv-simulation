@@ -1,3 +1,4 @@
+from __future__ import annotations
 import json
 import argparse
 import pathlib
@@ -11,7 +12,7 @@ class ImageWithBBoxes:
     Stores all bounding boxes for a single image.
     """
 
-    def __init__(self, bboxes: "list[dict]", image_id: int):
+    def __init__(self, bboxes: list[dict], image_id: int):
         """
         Initializes the ImageWithBBoxes object.
 
@@ -19,9 +20,9 @@ class ImageWithBBoxes:
             bboxes: List of bounding boxes that have the same image_id.
             image_id: The image_id of the image.
         """
-        self.bboxes = defaultdict(dict)  # Maps bbox id to bbox
-        self.max_area = {}  # Maximum area bbox for each category
-        self.counts = {}  # Number of bboxes for each category
+        self.bboxes: dict[int, dict] = defaultdict(dict)  # Maps bbox id to bbox
+        self.max_area: dict[int, int] = {}  # Maximum area bbox for each category
+        self.counts: dict[int, int] = {}  # Number of bboxes for each category
         self.image_id = image_id  # image_id
 
         for bbox in bboxes:
@@ -83,9 +84,9 @@ def filter(bbox_path: pathlib.Path):
 
         # Export each image
         export_jsons = []
-        for image in images:
-            image.filter()
-            bbox_list = image.export()
+        for image_with_bboxes in images:
+            image_with_bboxes.filter()
+            bbox_list = image_with_bboxes.export()
             export_jsons.extend(bbox_list)
         super_dict["annotations"] = export_jsons
 
