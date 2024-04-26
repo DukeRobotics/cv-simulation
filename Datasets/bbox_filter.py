@@ -39,7 +39,7 @@ class ImageWithBBoxes:
         - Bounding boxes with area MAX_AREA or smaller
         - All bounding boxes with area smaller than the maximum area for the same category
         """
-        MAX_AREA = 5
+        MAX_AREA = 50
 
         # Identify bad bounding boxes
         remove = []
