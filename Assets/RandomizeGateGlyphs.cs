@@ -25,7 +25,7 @@ public class RandomizeGateGlyphs : MonoBehaviour
         renderer1.material = materials[firstMaterialIndex];
         renderer1.transform.localEulerAngles = new Vector3(180, 180+randomRotationDeg1, 180);
         renderer1 = frontGlyphs[1].GetComponent<Renderer>();
-        renderer1.material = materials[1 - firstMaterialIndex];
+        renderer1.material = materials[1-firstMaterialIndex];
         renderer1.transform.localEulerAngles = new Vector3(180, 180+randomRotationDeg2, 180);
         labeling1.labels.Clear();
         labeling1.labels.Add(labels[firstMaterialIndex]);
@@ -56,7 +56,7 @@ public class RandomizeGateGlyphs : MonoBehaviour
         renderer1.material = materials[firstMaterialIndex];
         renderer1.transform.localEulerAngles = new Vector3(180, 180+randomRotationDeg1, 180);
         renderer1 = frontGlyphs[1].GetComponent<Renderer>();
-        renderer1.material = materials[1 - firstMaterialIndex];
+        renderer1.material = materials[1-firstMaterialIndex];
         renderer1.transform.localEulerAngles = new Vector3(180, 180+randomRotationDeg2, 180);
         labeling1.labels.Clear();
         labeling1.labels.Add(labels[firstMaterialIndex]);
