@@ -64,7 +64,17 @@ def load_roboflow_config():
         raise SystemExit(f"Invalid schema for {ROBOFLOW_CONFIG_FILE.name}. {e}")
 
 
-def upload_image(image_path: pathlib.Path, project: Roboflow, annotation_filename: str, success_path: pathlib.Path):
+def upload_image(image_path: pathlib.Path, project: Roboflow, annotation_filename: pathlib.Path,
+                 success_path: pathlib.Path):
+    """
+    Upload an image to Roboflow.
+
+    Args:
+        image_path: Path to the image file.
+        project: Roboflow project object.
+        annotation_filename: Path to the annotation file.
+        success_path: Path to save the image file after successful upload.
+    """
     NUM_RETRY_UPLOADS = 5
     results = project.single_upload(
         image_path=str(image_path),
@@ -80,9 +90,13 @@ def upload_image(image_path: pathlib.Path, project: Roboflow, annotation_filenam
         image_path.rename(success_path / image_path.name)
 
 
-def upload_dataset(config: RoboflowConfig, dataset_path: pathlib):
+def upload_dataset(config: RoboflowConfig, dataset_path: pathlib.Path):
     """
     Upload a dataset to Roboflow.
+
+    Args:
+        config: Roboflow configuration dictionary.
+        dataset_path: Path to the COCO dataset to upload.
     """
 
     # Initialize Roboflow client
