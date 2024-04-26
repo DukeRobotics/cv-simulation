@@ -84,3 +84,4 @@ Upload the generated dataset to [Roboflow](https://roboflow.com) to easily train
 ```python
 python Datasets/roboflow_upload.py <dataset_path>
 ```
+Images that are successfully uploaded are moved to the `success` directory. You may need to rerun `roboflow_upload.py` if any images fail to upload.
