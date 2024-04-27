@@ -24,17 +24,17 @@ The code is written in C# in the following files:
 - [Miniconda](https://docs.conda.io/projects/miniconda/en/latest/)
 
 Once Miniconda is installed, create the `cv-sim` environment with:
-```python
+```bash
 conda env create -f environment.yml
 ```
 
 Then, activate the `cv-sim` environment with:
-```python
+```bash
 conda activate cv-sim
 ```
 
 Lastly, due to a [backwards compatiability issue](https://github.com/opencv/opencv-python/issues/884) with `opencv`, downgrade `opencv` with:
-```python
+```bash
 pip install opencv-python==4.8.0.74
 ```
 An error about dependency resolution may appear. This can be safely ignored.
@@ -59,7 +59,7 @@ The new folder contains the generated images and bounding boxes in [SOLO](https:
 
 ## Visualizing SOLO Datasets
 To visualize a SOLO dataset, use [Voxel51](https://voxel51.com):
-```python
+```bash
 pysolotools-fiftyone "Datasets/<SOLO Dataset>"
 ```
 
