@@ -5,15 +5,15 @@ A Unity 3D underwater simulation to generate synthetic, labeled data for compute
 ## Simulation Overview
 The simulation was built using Unity 2022 LTS. It uses the HDRP render pipeline and [Unity Perception](https://docs.unity3d.com/Packages/com.unity.perception@1.0/manual/index.html). See [this tutorial](https://github.com/Unity-Technologies/com.unity.perception/blob/main/com.unity.perception/Documentation~/Tutorial/TUTORIAL.md) to get started with Unity Perception.
 
-The simulation is setup to generate synthetic images of the gate and buoy with automatically generated bounding boxes for the RoboSub 2023 glyphs. The simulation occurs underwater, in a simulated swimming pool with murky water.
+The simulation is setup to generate synthetic images of the gate and buoy with automatically generated bounding boxes for RoboSub glyphs. The simulation occurs underwater, in a simulated swimming pool.
 
-The camera captures the gate and buoy from a variety of distances and angles. In addition to the camera movements, the sun's position, buoy and gate glyphs, and gate boxes are also randomized. This ensures that the camera captures the gate and buoy under a variety of different conditions leading to a more robust CV model.
+The camera captures the gate and buoy from a variety of different distances and angles. In addition to the camera movements, the sun's position, buoy and gate glyphs, and gate boxes are also randomized. This ensures that the camera captures the gate and buoy under a variety of different conditions leading to a more robust CV model.
 
 ## Code Overview
 The code is written in C# in the following files:
 - [CameraController.cs](/Assets/CameraController.cs): Controls the camera movements.
-- [RandomizedGateHue.cs](/Assets/RandomizeGateHue.cs): Randomizes the hue of the gate.
-- [RotateGlyphs.cs](/Assets/RotateGlyphs.cs): Randomizes the orientation of the buoy glyphs.
+- [RandomizeGateHue.cs](/Assets/RandomizeGateHue.cs): Randomizes the hue of the gate.
+- [RotateGlyphs.cs](/Assets/RotateGlyphs.cs): Randomizes the order and orientation of the buoy glyphs.
 - [RandomizeGateGlyphs.cs](/Assets/RandomizeGateGlyphs.cs): Randomizes the order and orientation of the gate glyphs.
 - [RandomizeBoxes.cs](/Assets/RandomizeBoxes.cs): Randomizes the order of the gate boxes.
 - [Sun.cs](/Assets/Sun.cs): Randomizes the sun's position.
@@ -50,7 +50,8 @@ Use the play button at the top of the Unity editor to run the simulation. The fo
 - Scroll down in the inspector to "Perception Camera (Script)"
 - Check/uncheck "Save Camera RGB Output to Disk"
 
-_Note: Generated datasets can occupy a lot of disk space._
+> [!WARNING]
+> Generated datasets can occupy a lot of disk space.
 
 Each time the simulation is run with the above option checked, a new folder is created inside the `Datasets` directory.
 
