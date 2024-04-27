@@ -77,6 +77,9 @@ solo2coco "Datasets/<SOLO Dataset>" <Output Path>
 
 Many converters exist to convert COCO to other formats.
 
+## Image Filter
+Navigate to `<COCO dataset>/images` and manually delete any poor quality images. Unity Perception usually outputs some bad images at the beginning of generation.
+
 ## Bounding Box Filter
 Use `bbox_filter.py` to filter out poor quality bounding boxes.
 ```bash
