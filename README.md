@@ -74,11 +74,6 @@ solo2coco "Datasets/<SOLO Dataset>" <Output Path>
 
 Many converters exist to convert COCO to other formats.
 
-To convert from SOLO to YOLO format, run:
-```python
-solo2yolo "Datasets/<SOLO Dataset>" <Output Path>
-```
-
 ## Uploading to Roboflow
 Upload the generated dataset to [Roboflow](https://roboflow.com) to easily train a model or share the dataset with others.
 
