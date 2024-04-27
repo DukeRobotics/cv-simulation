@@ -87,3 +87,6 @@ Upload a COCO dataset to [Roboflow](https://roboflow.com) to easily train a mode
 python Datasets/roboflow_upload.py <COCO dataset path>
 ```
 Images that are successfully uploaded are moved to the `success` directory. You may need to rerun `roboflow_upload.py` if any images fail to upload.
+
+## CV Workflow
+For a complete guide on our CV workflow, view [Computer Vision Workflow](https://dukerobotics.github.io/wiki/#/computer_vision/workflow) on our wiki.
