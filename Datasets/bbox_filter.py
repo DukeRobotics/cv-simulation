@@ -23,7 +23,7 @@ class ImageWithBBoxes:
         self.bboxes: dict[int, dict] = defaultdict(dict)  # Maps bbox id to bbox
         self.max_area: dict[int, int] = {}  # Maximum area bbox for each category
         self.counts: dict[int, int] = {}  # Number of bboxes for each category
-        self.image_id = image_id  # image_id
+        self.image_id = image_id  # image_id of the image
 
         for bbox in bboxes:
             category_id = bbox["category_id"]
@@ -38,9 +38,9 @@ class ImageWithBBoxes:
 
         The following bounding boxes are removed:
         - Bounding boxes with area MAX_AREA or smaller
-        - All bounding boxes with area smaller than the maximum area for the same category
+        - All bounding boxes with area smaller than the maximum area for its category
         """
-        MAX_AREA = 50
+        MAX_AREA = 50  # May need to be adjusted for different simulations
 
         # Identify bad bounding boxes
         remove = []
@@ -52,7 +52,7 @@ class ImageWithBBoxes:
         for id in remove:
             del self.bboxes[id]
 
-    def export(self) -> "list[dict]":
+    def export(self) -> list[dict]:
         """
         Returns:
             List of bounding boxes for the image.
@@ -62,7 +62,7 @@ class ImageWithBBoxes:
 
 def filter(bbox_path: pathlib.Path):
     """
-    Filter the bounding boxes in a COCO dataset.
+    Filter the bounding boxes of a COCO dataset.
 
     Args:
         bbox_path: Path to the JSON file containing the bounding boxes.
