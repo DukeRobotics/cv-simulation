@@ -21,8 +21,7 @@ class RoboflowConfig(TypedDict):
 
 def create_roboflow_project_config_file():
     """
-    Prepare a yaml config file for uploading to Roboflow and save the file at
-    footage_extraction/roboflow_project_config.yaml
+    Generate a yaml config file for uploading to Roboflow.
     """
     # YAML content with comments
     yaml_content = textwrap.dedent(
@@ -64,7 +63,7 @@ def load_roboflow_config():
         raise SystemExit(f"Invalid schema for {ROBOFLOW_CONFIG_FILE.name}. {e}")
 
 
-def upload_image(image_path: pathlib.Path, project: Roboflow, annotation_filename: pathlib.Path,
+def upload_image(image_path: pathlib.Path, project: Roboflow, annotation_path: pathlib.Path,
                  success_path: pathlib.Path):
     """
     Upload an image to Roboflow.
@@ -72,13 +71,13 @@ def upload_image(image_path: pathlib.Path, project: Roboflow, annotation_filenam
     Args:
         image_path: Path to the image file.
         project: Roboflow project object.
-        annotation_filename: Path to the annotation file.
+        annotation_path: Path to the annotation file.
         success_path: Path to save the image file after successful upload.
     """
     NUM_RETRY_UPLOADS = 5
     results = project.single_upload(
         image_path=str(image_path),
-        annotation_path=annotation_filename.resolve(),
+        annotation_path=annotation_path.resolve(),
         NUM_RETRY_UPLOADS=NUM_RETRY_UPLOADS,
     )
     print(results)
@@ -87,7 +86,7 @@ def upload_image(image_path: pathlib.Path, project: Roboflow, annotation_filenam
         results.get("image").get("success") is True
         and results.get("annotation").get("success") is True
     ):
-        image_path.rename(success_path / image_path.name)
+        image_path.rename(success_path / image_path.name)  # Move the image to the success folder
 
 
 def upload_dataset(config: RoboflowConfig, dataset_path: pathlib.Path):
@@ -98,20 +97,21 @@ def upload_dataset(config: RoboflowConfig, dataset_path: pathlib.Path):
         config: Roboflow configuration dictionary.
         dataset_path: Path to the COCO dataset to upload.
     """
-
     # Initialize Roboflow client
     rf = Roboflow(api_key=config["api_key"])
     project = rf.workspace(config["workspace"]).project(config["project"])
 
-    # Annotation file path and format (e.g., .coco.json)
+    # Annotation file path
     annotation_filename = dataset_path / "bbox.json"
 
-    # Upload images
+    # Images to upload
     image_glob = (dataset_path / "images").glob("*.png")
 
+    # Create a success folder
     success_path = dataset_path / "success"
     success_path.mkdir(parents=True, exist_ok=True)
 
+    # Upload images
     with concurrent.futures.ThreadPoolExecutor() as executor:
         upload_image_closed = functools.partial(
             upload_image,
