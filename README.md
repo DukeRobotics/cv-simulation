@@ -72,6 +72,9 @@ To convert from SOLO to COCO format, run:
 solo2coco "Datasets/<SOLO Dataset>" <Output Path>
 ```
 
+> [!IMPORTANT]
+> `solo2coco` creates the real `coco` dataset inside an extraneous `coco` directory. In the following steps, either specify `coco/coco` instead of just `coco` or remove the unnecessary parent folder.
+
 Many converters exist to convert COCO to other formats.
 
 ## Bounding Box Filter
