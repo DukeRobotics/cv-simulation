@@ -30,10 +30,10 @@ def create_roboflow_project_config_file():
         # Configuration file for Roboflow upload
 
         # Go to https://app.roboflow.com/settings/account.
-        # Navigate to Desired Workspace > Roboflow API and copy/paste your Private API Key.
+        # Navigate to the desired workspace > Roboflow API and copy/paste your Private API Key.
         api_key: ~
 
-        # Navitgate to the desired project and copy/paste the following information from the URL:
+        # Navigate to the desired project version and copy/paste the following information from the URL:
         # https://app.roboflow.com/<workspace>/<project>/*
         workspace: ~
         project: ~
