@@ -14,7 +14,7 @@ public class FlyCamera : MonoBehaviour {
     float mainSpeed = 10.0f;
     float camSens = 0.25f;
     private Vector3 lastMouse = new Vector3(255, 255, 255);
-    private float totalRun= 1.0f;
+    private float totalRun = 1.0f;
 
     public bool autoPilot = false;
 
