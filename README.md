@@ -74,6 +74,12 @@ solo2coco "Datasets/<SOLO Dataset>" <Output Path>
 
 Many converters exist to convert COCO to other formats.
 
+## Bounding Box Filter
+Use `bbox_filter.py` to filter out poor quality bounding boxes.
+```bash
+python Datasets/bbox_filter.py <COCO dataset path>
+```
+
 ## Uploading to Roboflow
 Upload a COCO dataset to [Roboflow](https://roboflow.com) to easily train a model or share the dataset with others.
 
