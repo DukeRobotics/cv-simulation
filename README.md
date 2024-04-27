@@ -68,7 +68,7 @@ pysolotools-fiftyone "Datasets/<SOLO Dataset>"
 
 ## Converting from SOLO
 To convert from SOLO to COCO format, run:
-```python
+```bash
 solo2coco "Datasets/<SOLO Dataset>" <Output Path>
 ```
 
@@ -83,7 +83,7 @@ python Datasets/bbox_filter.py <COCO dataset path>
 ## Uploading to Roboflow
 Upload a COCO dataset to [Roboflow](https://roboflow.com) to easily train a model or share the dataset with others.
 
-```python
+```bash
 python Datasets/roboflow_upload.py <COCO dataset path>
 ```
 Images that are successfully uploaded are moved to the `success` directory. You may need to rerun `roboflow_upload.py` if any images fail to upload.
