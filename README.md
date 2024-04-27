@@ -75,9 +75,9 @@ solo2coco "Datasets/<SOLO Dataset>" <Output Path>
 Many converters exist to convert COCO to other formats.
 
 ## Uploading to Roboflow
-Upload the generated dataset to [Roboflow](https://roboflow.com) to easily train a model or share the dataset with others.
+Upload a COCO dataset to [Roboflow](https://roboflow.com) to easily train a model or share the dataset with others.
 
 ```python
-python Datasets/roboflow_upload.py <dataset_path>
+python Datasets/roboflow_upload.py <coco dataset path>
 ```
 Images that are successfully uploaded are moved to the `success` directory. You may need to rerun `roboflow_upload.py` if any images fail to upload.
