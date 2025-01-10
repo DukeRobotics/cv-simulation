@@ -13,23 +13,17 @@ MonoBehaviour:
   m_Name: PoolIdLabelConfig
   m_EditorClassIdentifier: 
   m_LabelEntries:
-  - label: buoy_abydos_taurus
+  - label: gate_whole
     id: 0
     hierarchyRelation: 0
-  - label: buoy_abydos_serpenscaput
+  - label: gate_tick
     id: 1
     hierarchyRelation: 0
-  - label: buoy_earth_auriga
+  - label: gate_red_cw
     id: 2
     hierarchyRelation: 0
-  - label: buoy_earth_cetus
+  - label: gate_blue_ccw
     id: 3
-    hierarchyRelation: 0
-  - label: gate_abydos
-    id: 4
-    hierarchyRelation: 0
-  - label: gate_earth
-    id: 5
     hierarchyRelation: 0
   autoAssignIds: 1
   startingLabelId: 0

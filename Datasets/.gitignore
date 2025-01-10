@@ -1,0 +1,7 @@
+# Ignore everything
+*
+
+# Except these files
+!.gitignore
+!roboflow_upload.py
+!bbox_filter.py

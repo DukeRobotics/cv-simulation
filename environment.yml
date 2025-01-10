@@ -1,0 +1,10 @@
+name: cv-sim
+channels:
+  - defaults
+dependencies:
+  - python=3.8
+  - pip
+  - pip:
+    - openexr
+    - pysolotools-fiftyone
+    - pydantic
