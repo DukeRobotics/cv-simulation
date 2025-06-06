@@ -75,11 +75,15 @@ def upload_image(image_path: pathlib.Path, project: Roboflow, annotation_path: p
         success_path: Path to save the image file after successful upload.
     """
     NUM_RETRY_UPLOADS = 5
-    results = project.single_upload(
-        image_path=str(image_path),
-        annotation_path=annotation_path.resolve(),
-        NUM_RETRY_UPLOADS=NUM_RETRY_UPLOADS,
-    )
+
+    try:
+        results = project.single_upload(
+            image_path=str(image_path),
+            annotation_path=str(annotation_path),
+            NUM_RETRY_UPLOADS=NUM_RETRY_UPLOADS,
+        )
+    except Exception as e:
+        print(f"ERROR: {e}")
 
     if (
         results.get("image").get("success") is True

@@ -19,7 +19,7 @@ MonoBehaviour:
   - label: shark_front
     id: 1
     hierarchyRelation: 0
-  - label: swordfish_front
+  - label: sawfish_front
     id: 2
     hierarchyRelation: 0
   autoAssignIds: 1
