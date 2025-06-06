@@ -80,7 +80,6 @@ def upload_image(image_path: pathlib.Path, project: Roboflow, annotation_path: p
         annotation_path=annotation_path.resolve(),
         NUM_RETRY_UPLOADS=NUM_RETRY_UPLOADS,
     )
-    print(results)
 
     if (
         results.get("image").get("success") is True
@@ -116,7 +115,7 @@ def upload_dataset(config: RoboflowConfig, dataset_path: pathlib.Path):
         upload_image_closed = functools.partial(
             upload_image,
             project=project,
-            annotation_filename=annotation_filename,
+            annotation_path=annotation_filename,
             success_path=success_path,
         )
         executor.map(upload_image_closed, list(image_glob))

@@ -13,17 +13,14 @@ MonoBehaviour:
   m_Name: PoolIdLabelConfig
   m_EditorClassIdentifier: 
   m_LabelEntries:
-  - label: gate_whole
+  - label: torpedo_banner
     id: 0
     hierarchyRelation: 0
-  - label: gate_tick
+  - label: shark_front
     id: 1
     hierarchyRelation: 0
-  - label: gate_red_cw
+  - label: swordfish_front
     id: 2
-    hierarchyRelation: 0
-  - label: gate_blue_ccw
-    id: 3
     hierarchyRelation: 0
   autoAssignIds: 1
   startingLabelId: 0
