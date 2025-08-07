@@ -79,3 +79,4 @@ crashlytics-build.properties
 
 # Python Environment
 .venv
+coco_4/coco/
