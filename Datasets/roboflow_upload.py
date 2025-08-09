@@ -74,13 +74,17 @@ def upload_image(image_path: pathlib.Path, project: Roboflow, annotation_path: p
         annotation_path: Path to the annotation file.
         success_path: Path to save the image file after successful upload.
     """
+
     NUM_RETRY_UPLOADS = 5
+
     results = project.single_upload(
         image_path=str(image_path),
         annotation_path=annotation_path.resolve(),
         NUM_RETRY_UPLOADS=NUM_RETRY_UPLOADS,
     )
-    print(results)
+
+    # print(results.get("image").get("success"))
+    # print(results.get("annotation").get("success"))
 
     if (
         results.get("image").get("success") is True
@@ -112,14 +116,32 @@ def upload_dataset(config: RoboflowConfig, dataset_path: pathlib.Path):
     success_path.mkdir(parents=True, exist_ok=True)
 
     # Upload images
-    with concurrent.futures.ThreadPoolExecutor() as executor:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
         upload_image_closed = functools.partial(
             upload_image,
             project=project,
-            annotation_filename=annotation_filename,
+            annotation_path=annotation_filename,
             success_path=success_path,
         )
         executor.map(upload_image_closed, list(image_glob))
+
+    # with concurrent.futures.ThreadPoolExecutor(max_workers=8) as executor:
+    #     futures = []
+    #     for image_path in (dataset_path / "images").glob("*.png"):
+    #         future = executor.submit(
+    #             upload_image,
+    #             image_path,
+    #             project,
+    #             annotation_filename,
+    #             success_path
+    #         )
+    #         futures.append(future)
+
+    #     for future in concurrent.futures.as_completed(futures):
+    #         try:
+    #             future.result()
+    #         except Exception as e:
+    #             print(f"Upload failed: {e}")
 
 
 if __name__ == "__main__":

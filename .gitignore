@@ -76,3 +76,7 @@ crashlytics-build.properties
 
 # Visual Studio Code settings
 .vscode
+
+# Python Environment
+.venv
+coco_4/coco/
